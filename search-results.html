@@ -75,9 +75,9 @@
 
         const resultsDiv = document.getElementById('results');
 
-        <!--The value of visited is incremented everytime a hotel ends up in search results. It isn't entirely correct as per question.-->
+        //The value of visited is incremented everytime a hotel ends up in search results. It isn't entirely correct as per question.
         filteredHotels.forEach(hotel => {
-          hotel.visited += 1; // 
+          hotel.visited += 1; 
           const hotelDiv = document.createElement('div');
           hotelDiv.innerHTML = `<p>Name: ${hotel.name}</p>
                                 <p>Address: ${hotel.address}</p>
@@ -113,7 +113,7 @@
           popularHotelsDiv.appendChild(hotelDiv);
         });
 
-        <!--Cheap hotels are the 3 cheapest hotels available. Further tweaking could be done to show 3 cheapest hotels based on the city selected by the user-->
+      //Cheap hotels are the 3 cheapest hotels available. Further tweaking could be done to show 3 cheapest hotels based on the city selected by the user
         const cheapHotelsDiv = document.getElementById('cheapHotels');
         const cheapHotels = data.sort((a, b) => a.price - b.price).slice(0, 3);
 
@@ -129,7 +129,7 @@
         });
       });
 
-    <!--Hotel booking function. It will store the details in a json file. This can be retireved to show users their booking details-->
+    //Hotel booking function. It will store the details in a json file. This can be retireved to show users their booking details
     function bookHotel(hotelName, startDate, endDate, price) {
       const bookingInfo = {
         hotel: hotelName,
