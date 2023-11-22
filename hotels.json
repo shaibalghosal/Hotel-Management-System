@@ -1,6 +1,5 @@
-// hotels.json
-[
-  {
+
+{
     "name": "Hotel A",
     "address": "123 Main St",
     "city": "City1",
@@ -95,6 +94,4 @@
     "rooms": 42,
     "price": 100,
     "visited": 0
-  },
-  // Add more hotels as needed
-]
+  }
