@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Results</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 20px;
+    }
+
+    h2, h3 {
+      color: #333;
+    }
+
+    #results, #recommended {
+      margin-top: 20px;
+    }
+
+    #results div, #recommended div {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h2>Search Results</h2>
+  <!--Search results from the previous page will be displayed-->
+  <div id="results">
+    
+  </div>
+
+  <h2>Recommended</h2>
+  
+  <div id="recommended">
+    <h3>Popular Hotels</h3>
+<!--Hotels with the highest visited count will be displayed here-->
+    <div id="popularHotels">
+      
+    </div>
+
+    <h3>Cheap Hotels</h3>
+<!--Hotels with the lowest prices will be displayed here-->
+    <div id="cheapHotels">
+      
+    </div>
+  </div>
+  <script>
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const startDate = urlParams.get('startDate');
+    const endDate = urlParams.get('endDate');
+    const city = urlParams.get('city');
+
+   
+    fetch('hotels.json')
+      .then(response => response.json())
+      .then(data => {
+        const filteredHotels = data.filter(hotel => hotel.city === city);
+
+        const resultsDiv = document.getElementById('results');
+
+        <!--The value of visited is incremented everytime a hotel ends up in search results. It isn't entirely correct as per question.-->
+        filteredHotels.forEach(hotel => {
+          hotel.visited += 1; // 
+          const hotelDiv = document.createElement('div');
+          hotelDiv.innerHTML = `<p>Name: ${hotel.name}</p>
+                                <p>Address: ${hotel.address}</p>
+                                <p>Rooms: ${hotel.rooms}</p>
+                                <p>Price: ${hotel.price}</p>
+                                <p>Visited: ${hotel.visited} times</p>
+                                <button onclick="bookHotel('${hotel.name}', '${startDate}', '${endDate}', ${hotel.price})">Book</button>`;
+          resultsDiv.appendChild(hotelDiv);
+        });
+
+        
+        fetch('hotels.json', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+       <!--Popular hotels are determined by the highest visited count. Top 3 are displayed-->
+        const popularHotelsDiv = document.getElementById('popularHotels');
+        const popularHotels = data.sort((a, b) => b.visited - a.visited).slice(0, 3);
+
+        popularHotels.forEach(popularHotel => {
+          const hotelDiv = document.createElement('div');
+          hotelDiv.innerHTML = `<p>Name: ${popularHotel.name}</p>
+                                <p>Address: ${popularHotel.address}</p>
+                                <p>Rooms: ${popularHotel.rooms}</p>
+                                <p>Price: ${popularHotel.price}</p>
+                                <p>Visited: ${popularHotel.visited} times</p>
+                                <!--Visited is displayed to all users to confirm how many times people have booked the hotel.-->
+                                <button onclick="bookHotel('${popularHotel.name}', '${startDate}', '${endDate}', ${popularHotel.price})">Book</button>`;
+          popularHotelsDiv.appendChild(hotelDiv);
+        });
+
+        <!--Cheap hotels are the 3 cheapest hotels available. Further tweaking could be done to show 3 cheapest hotels based on the city selected by the user-->
+        const cheapHotelsDiv = document.getElementById('cheapHotels');
+        const cheapHotels = data.sort((a, b) => a.price - b.price).slice(0, 3);
+
+        cheapHotels.forEach(cheapHotel => {
+          const hotelDiv = document.createElement('div');
+          hotelDiv.innerHTML = `<p>Name: ${cheapHotel.name}</p>
+                                <p>Address: ${cheapHotel.address}</p>
+                                <p>Rooms: ${cheapHotel.rooms}</p>
+                                <p>Price: ${cheapHotel.price}</p>
+                                <p>Visited: ${cheapHotel.visited} times</p>
+                                <button onclick="bookHotel('${cheapHotel.name}', '${startDate}', '${endDate}', ${cheapHotel.price})">Book</button>`;
+          cheapHotelsDiv.appendChild(hotelDiv);
+        });
+      });
+
+    <!--Hotel booking function. It will store the details in a json file. This can be retireved to show users their booking details-->
+    function bookHotel(hotelName, startDate, endDate, price) {
+      const bookingInfo = {
+        hotel: hotelName,
+        startDate: startDate,
+        endDate: endDate,
+        price: price
+      };
+
+      
+      fetch('booking.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookingInfo),
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert(`Booking successful!\nTotal cost: ${data.totalCost}`);
+      });
+    }
+  </script>
+</body>
+</html>

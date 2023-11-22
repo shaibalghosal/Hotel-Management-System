@@ -1,0 +1,100 @@
+// hotels.json
+[
+  {
+    "name": "Hotel A",
+    "address": "123 Main St",
+    "city": "City1",
+    "rooms": 50,
+    "price": 100,
+    "visited": 0
+  },
+  {
+    "name": "Hotel B",
+    "address": "456 Oak St",
+    "city": "City2",
+    "rooms": 75,
+    "price": 120,
+    "visited": 0
+  },
+  {
+    "name": "Hotel C",
+    "address": "789 Pine St",
+    "city": "City3",
+    "rooms": 60,
+    "price": 150,
+    "visited": 0
+  },
+  {
+    "name": "Hotel D",
+    "address": "101 Cedar St",
+    "city": "City4",
+    "rooms": 40,
+    "price": 90,
+    "visited": 0
+  },
+  {
+    "name": "Hotel E",
+    "address": "202 Maple St",
+    "city": "City1",
+    "rooms": 55,
+    "price": 110,
+    "visited": 0
+  },
+  {
+    "name": "Hotel F",
+    "address": "303 Birch St",
+    "city": "City2",
+    "rooms": 70,
+    "price": 130,
+    "visited": 0
+  },
+  {
+    "name": "Hotel G",
+    "address": "404 Redwood St",
+    "city": "City3",
+    "rooms": 65,
+    "price": 140,
+    "visited": 0
+  },
+  {
+    "name": "Hotel H",
+    "address": "505 Elm St",
+    "city": "City4",
+    "rooms": 45,
+    "price": 95,
+    "visited": 0
+  },
+  {
+    "name": "Hotel I",
+    "address": "606 Cedar St",
+    "city": "City1",
+    "rooms": 48,
+    "price": 105,
+    "visited": 0
+  },
+  {
+    "name": "Hotel J",
+    "address": "707 Pine St",
+    "city": "City2",
+    "rooms": 80,
+    "price": 160,
+    "visited": 0
+  },
+  {
+    "name": "Hotel K",
+    "address": "808 Oak St",
+    "city": "City3",
+    "rooms": 55,
+    "price": 115,
+    "visited": 0
+  },
+  {
+    "name": "Hotel L",
+    "address": "909 Birch St",
+    "city": "City4",
+    "rooms": 42,
+    "price": 100,
+    "visited": 0
+  },
+  // Add more hotels as needed
+]
