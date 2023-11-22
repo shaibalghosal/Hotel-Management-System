@@ -97,7 +97,7 @@
           body: JSON.stringify(data),
         });
 
-       <!--Popular hotels are determined by the highest visited count. Top 3 are displayed-->
+       //Popular hotels are determined by the highest visited count. Top 3 are displayed
         const popularHotelsDiv = document.getElementById('popularHotels');
         const popularHotels = data.sort((a, b) => b.visited - a.visited).slice(0, 3);
 
